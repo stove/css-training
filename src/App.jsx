@@ -9,11 +9,16 @@ import { FaAppleWhole } from "react-icons/fa6";
 import { GiCutLemon } from "react-icons/gi";
 import { GiStrawberry } from "react-icons/gi";
 import { PiOrangeSliceLight } from "react-icons/pi";
-import card from "./components/Card.jsx";
 import Card from "./components/Card.jsx";
+import {useState} from "react";
 
 export default function App() {
-    // eslint-disable-next-line no-unused-vars
+    const [selected, setSelected] = useState(0 );
+    const handleClick = (key) => {
+        console.log(key);
+        setSelected(key);
+    };
+
     const cards = [
         {
             index: 0,
@@ -56,15 +61,13 @@ export default function App() {
             bgImg: orange,
         },
     ];
-    const handleClick = (key) => {
-        console.log(key);
-    };
+
     return <div className="h-screen flex items-center justify-center">
 
         { cards.map((card, key) => {
         return (
-            <div key={key} className="h-96 cursor-pointer" onClick={()=>handleClick(key)}>
-                <Card card = {card}/>
+            <div key={key} className= {` ${selected === key ? "w-[500px]" : "w-20" } h-96 cursor-pointer transition-all ease-out duration-[2000ms]` } onClick={()=>handleClick(key)}>
+                <Card card = {card} index = {key} selected={selected}/>
         </div>
         )})}
     </div>
